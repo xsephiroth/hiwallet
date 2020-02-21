@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "*.js": "javascriptreact"
+    },
+    "[javascript]": {
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true
+    },
+    "[scss]": {
+        "editor.tabSize": 2,
+    }
+}

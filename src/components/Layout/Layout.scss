@@ -1,0 +1,7 @@
+.layout {
+  height: calc(100vh - 3em);
+
+  &.full {
+    height: 100vh;
+  }
+}

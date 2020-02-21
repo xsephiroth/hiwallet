@@ -1,0 +1,84 @@
+@import '../../theme.scss';
+
+.list {
+  background-color: $bg-secondary;
+  height: calc(100vh - 3em - 9.5em - 2.7em);
+  overflow-y: scroll;
+
+  &.full {
+    height: calc(100vh - 3em - 9.5em);
+  }
+
+  .item {
+    background-color: $bg-secondary;
+    color: $text-primary;
+
+    width: 100%;
+    height: 60px;
+    padding: 10px 0;
+
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    justify-content: center;
+    align-items: center;
+
+    border-bottom: 2px solid $bg-primary;
+    &:last-child {
+      border: none;
+    }
+
+    .icon {
+      display: flex;
+      justify-content: center;
+      margin-left: 1.2em;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 0 15px;
+      overflow: hidden;
+
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: inset -25px -3px 13px -10px rgba(255, 255, 255, 0.85);
+        z-index: 1;
+      }
+
+      .title {
+        color: $text-primary;
+      }
+
+      .subtext {
+        font-size: 0.8em;
+        white-space: nowrap;
+        color: $text-secondary;
+      }
+    }
+
+    .income,
+    .expenditure {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 1.2em;
+      font-weight: 700;
+    }
+
+    .income {
+      color: #2ed573;
+    }
+
+    .expenditure {
+      color: $text-primary;
+    }
+  }
+}

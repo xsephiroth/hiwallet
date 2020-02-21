@@ -1,0 +1,59 @@
+@import '../../theme.scss';
+
+.heading {
+  @mixin headingMixin {
+    > * {
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+
+  height: 3em;
+  color: $text-primary;
+  background-color: $bg-secondary;
+  user-select: none;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  .start {
+    grid-column: 1/2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 0.65em;
+
+    @include headingMixin;
+
+    .back {
+      color: $text-primary;
+      margin-left: 0.8em;
+      opacity: 1;
+      font-size: 1.2em;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .title {
+    grid-column: 2/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+
+    @include headingMixin;
+  }
+
+  .end {
+    grid-column: 3/4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 0.65em;
+
+    @include headingMixin;
+  }
+}

@@ -1,0 +1,33 @@
+@import '../../theme.scss';
+
+.radio-group {
+  display: inline-block;
+  border: 1px solid #fbc4c4;
+  border-radius: 20px;
+  overflow: hidden;
+  user-select: none;
+
+  .radio-btn {
+    display: inline-block;
+    background-color: #fef0f0;
+    color: #f56c6c;
+    font-size: 0.9em;
+    padding: 0.5em 1.3em;
+    border-right: 1px solid #fbc4c4;
+    transition: all 0.1s ease;
+
+    &:nth-last-of-type(1) {
+      border-right: none;
+    }
+
+    input[type='radio'] {
+      -webkit-appearance: none;
+      visibility: hidden;
+    }
+
+    &.checked {
+      color: #fff;
+      background-color: #ff7979;
+    }
+  }
+}

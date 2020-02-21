@@ -1,0 +1,23 @@
+@import '../../theme.scss';
+
+.money-input {
+  border-bottom: 2px solid $primary;
+  font-weight: 700;
+  line-height: 2.5em;
+  margin-top: 10px;
+  padding-bottom: 5px;
+  color: $text-primary;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  .dollar-sign {
+    font-size: 2em;
+  }
+
+  .value {
+    font-size: 2.5em;
+    overflow: hidden;
+  }
+}

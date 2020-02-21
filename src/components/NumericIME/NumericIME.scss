@@ -1,0 +1,52 @@
+@import '../../theme.scss';
+
+.numeric-ime {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0.5em;
+
+  width: 100%;
+  z-index: 1001;
+  background-color: $bg-primary;
+  transition: bottom 0.8s ease;
+
+  position: fixed;
+  left: 0;
+  bottom: -100%;
+  &.show {
+    bottom: 0;
+  }
+
+  button {
+    border: none;
+    background-color: $bg-secondary;
+    font-weight: 700;
+    font-size: 1.5em;
+    color: $text-primary;
+    opacity: 1;
+
+    &:active {
+      opacity: 0.75;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .num,
+  .del,
+  .dot {
+    padding: 0.7em;
+  }
+
+  .zero {
+    grid-column: 1/3;
+  }
+  .enter {
+    grid-column: 4/5;
+    grid-row: 2/5;
+    background-color: $primary;
+    color: $light;
+  }
+}
