@@ -1,0 +1,16 @@
+@import '../../theme.scss';
+
+.datepicker[type='date'] {
+  border: 1px solid $primary;
+  border-radius: 20px;
+  padding: 0.5em 0.2em 0.5em 0.5em;
+
+  &::-webkit-datetime-edit {
+    max-width: 75%;
+  }
+
+  &::-webkit-clear-button,
+  &::-webkit-inner-spin-button {
+    display: none;
+  }
+}
