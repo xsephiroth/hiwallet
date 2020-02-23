@@ -5,6 +5,7 @@ import Heading from '../components/Heading';
 import { RadioButton, RadioButtonGroup } from '../components/RadioButton';
 import MoneyInput from '../components/MoneyInput';
 import DateInput from '../components/DateInput';
+import Note from '../components/Note';
 import NumericIME from '../components/NumericIME';
 
 import styles from './AddPage.module.scss';
@@ -26,10 +27,14 @@ const AddPage = () => {
   const [date, setDate] = useState(today);
   console.log(date);
 
+  const [note, setNote] = useState('');
+
+  const [numericIMEShow, setNumericIMEShow] = useState(true);
+
   const history = useHistory();
 
   return (
-    <Layout>
+    <Layout hideTabs>
       <Heading onBackClick={() => history.replace('/')} title="记账" />
       <div className="container">
         <div className={styles.infoBar}>
@@ -63,7 +68,12 @@ const AddPage = () => {
         </div>
         <MoneyInput value={moneyValue} />
       </div>
-      <NumericIME onChange={setMoneyValue} show={true} />
+      <Note
+        value={note}
+        onChange={e => setNote(e.target.value)}
+        onActiveChange={active => setNumericIMEShow(!active)}
+      />
+      <NumericIME onChange={setMoneyValue} show={numericIMEShow} />
     </Layout>
   );
 };
