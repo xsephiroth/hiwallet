@@ -32,6 +32,15 @@ const mockDataExpenditureCategories = [
   { id: 10, icon: faHome, name: '其他' }
 ];
 
+const mockDataIncomeCategories = [
+  { id: 1, icon: faHome, name: '工资' },
+  { id: 2, icon: faHome, name: '奖金' },
+  { id: 3, icon: faHome, name: '生意' },
+  { id: 4, icon: faHome, name: '红包' },
+  { id: 5, icon: faHome, name: '退款' },
+  { id: 6, icon: faHome, name: '其他' }
+];
+
 const AddPage = () => {
   const [billingType, setBillingType] = useState('expenditure');
   const handleBillintTypeChange = e => setBillingType(e.target.value);
@@ -44,6 +53,10 @@ const AddPage = () => {
 
   const [expenditureCategoryId, setExpenditureCategoryId] = useState(
     mockDataExpenditureCategories[0].id
+  );
+
+  const [incomeCategoryId, setIncomeCategoryId] = useState(
+    mockDataIncomeCategories[0].id
   );
 
   const [note, setNote] = useState('');
@@ -92,6 +105,13 @@ const AddPage = () => {
           categoryId={expenditureCategoryId}
           categories={mockDataExpenditureCategories}
           onChange={id => setExpenditureCategoryId(id)}
+        />
+      )}
+      {billingType === 'income' && (
+        <CategoryButtonGroup
+          categoryId={incomeCategoryId}
+          categories={mockDataIncomeCategories}
+          onChange={id => setIncomeCategoryId(id)}
         />
       )}
       <Note
