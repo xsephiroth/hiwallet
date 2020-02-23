@@ -2,7 +2,7 @@ import React from 'react';
 import Heading from '../components/Heading';
 import InfoCard from '../components/InfoCard';
 import bgImg from '../assets/bg.jpg';
-import ListCard from '../components/ListCard';
+import { ListCard, ListCardItem } from '../components/ListCard';
 import Layout from '../components/Layout';
 
 import {
@@ -111,8 +111,30 @@ const HomePage = () => {
         <p>收入12345.67</p>
       </InfoCard>
       <div className={styles.listContainer}>
-        <ListCard start="02-13" end="支 20.00" data={mockData} />
-        <ListCard start="02-12" end="收 2000 支 180" data={mockData} />
+        <ListCard start="02-13" end="支 20.00">
+          {mockData?.map(data => (
+            <ListCardItem
+              key={data.id}
+              icon={data.icon}
+              title={data.title}
+              subtext={data.subtext}
+              income={data?.income}
+              expenditure={data?.expenditure}
+            />
+          ))}
+        </ListCard>
+        <ListCard start="02-12" end="收 2000 支 180">
+          {mockData?.map(data => (
+            <ListCardItem
+              key={data.id}
+              icon={data.icon}
+              title={data.title}
+              subtext={data.subtext}
+              income={data?.income}
+              expenditure={data?.expenditure}
+            />
+          ))}
+        </ListCard>
       </div>
     </Layout>
   );
