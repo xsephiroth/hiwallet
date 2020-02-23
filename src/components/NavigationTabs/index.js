@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
-import { faMap, faChartBar } from '@fortawesome/free-regular-svg-icons';
+import { faPlusCircle, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faMap } from '@fortawesome/free-regular-svg-icons';
 import './NavigationTabs.scss';
 
 const NavigationTabs = () => {
@@ -32,11 +32,11 @@ const NavigationTabs = () => {
         </div>
 
         <div
-          className={classnames('tab', { active: pathname === '/wallet' })}
-          onClick={useCallback(() => history.replace('/wallet'), [history])}
+          className={classnames('tab', { active: pathname === '/account' })}
+          onClick={useCallback(() => history.replace('/account'), [history])}
         >
-          <FontAwesomeIcon icon={faChartBar} size="2x" />
-          统计
+          <FontAwesomeIcon icon={faWallet} size="2x" />
+          账户
         </div>
       </div>
     </div>
