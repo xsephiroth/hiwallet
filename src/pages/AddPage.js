@@ -5,6 +5,8 @@ import Heading from '../components/Heading';
 import { RadioButton, RadioButtonGroup } from '../components/RadioButton';
 import MoneyInput from '../components/MoneyInput';
 import DateInput from '../components/DateInput';
+import CategoryButtonGroup from '../components/CategoryButtonGroup';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import Note from '../components/Note';
 import NumericIME from '../components/NumericIME';
 
@@ -17,6 +19,19 @@ const getToday = () => {
   return `${date.getFullYear()}-${month}-${day}`;
 };
 
+const mockDataExpenditureCategories = [
+  { id: 1, icon: faHome, name: '购物' },
+  { id: 2, icon: faHome, name: '餐饮' },
+  { id: 3, icon: faHome, name: '住房' },
+  { id: 4, icon: faHome, name: '交通' },
+  { id: 5, icon: faHome, name: '医疗' },
+  { id: 6, icon: faHome, name: '亲子' },
+  { id: 7, icon: faHome, name: '学习' },
+  { id: 8, icon: faHome, name: '娱乐' },
+  { id: 9, icon: faHome, name: '宠物' },
+  { id: 10, icon: faHome, name: '其他' }
+];
+
 const AddPage = () => {
   const [billingType, setBillingType] = useState('expenditure');
   const handleBillintTypeChange = e => setBillingType(e.target.value);
@@ -26,6 +41,10 @@ const AddPage = () => {
   const today = useMemo(() => getToday(), []);
   const [date, setDate] = useState(today);
   console.log(date);
+
+  const [expenditureCategoryId, setExpenditureCategoryId] = useState(
+    mockDataExpenditureCategories[0].id
+  );
 
   const [note, setNote] = useState('');
 
@@ -68,6 +87,13 @@ const AddPage = () => {
         </div>
         <MoneyInput value={moneyValue} />
       </div>
+      {billingType === 'expenditure' && (
+        <CategoryButtonGroup
+          categoryId={expenditureCategoryId}
+          categories={mockDataExpenditureCategories}
+          onChange={id => setExpenditureCategoryId(id)}
+        />
+      )}
       <Note
         value={note}
         onChange={e => setNote(e.target.value)}
