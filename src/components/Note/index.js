@@ -1,13 +1,21 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import classnames from 'classnames';
 import './Note.scss';
 
 const Note = ({ onActiveChange, ...props }) => {
+  const [editing, setEditing] = useState(false);
   const ref = useRef();
   useEffect(() => {
     const current = ref.current;
 
-    const enter = () => onActiveChange && onActiveChange(true);
-    const leave = () => onActiveChange && onActiveChange(false);
+    const enter = () => {
+      setEditing(true);
+      onActiveChange && onActiveChange(true);
+    };
+    const leave = () => {
+      setEditing(false);
+      onActiveChange && onActiveChange(false);
+    };
 
     if (current) {
       current.addEventListener('mouseenter', enter);
@@ -24,7 +32,8 @@ const Note = ({ onActiveChange, ...props }) => {
 
   return (
     <textarea
-      className="note"
+      // className="note"
+      className={classnames('note', { editing })}
       placeholder="备注"
       {...props}
       ref={ref}

@@ -8,8 +8,12 @@
 
   font-family: inherit;
   font-size: 0.8rem;
-  color: $text-primary;
+  color: $text-secondary;
 
   line-height: 1em;
   padding: 1em;
+
+  &.editing {
+    color: $text-primary;
+  }
 }
