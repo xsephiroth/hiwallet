@@ -6,7 +6,22 @@ import { RadioButton, RadioButtonGroup } from '../components/RadioButton';
 import MoneyInput from '../components/MoneyInput';
 import DateInput from '../components/DateInput';
 import CategoryButtonGroup from '../components/CategoryButtonGroup';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import {
+  faShoppingCart,
+  faUtensils,
+  faHome,
+  faBus,
+  faCapsules,
+  faBaby,
+  faBook,
+  faDice,
+  faPaw,
+  faClipboardList,
+  faHandshake,
+  faMoneyCheckAlt,
+  faGem,
+  faCommentDollar
+} from '@fortawesome/free-solid-svg-icons';
 import Note from '../components/Note';
 import NumericIME from '../components/NumericIME';
 
@@ -20,25 +35,23 @@ const getToday = () => {
 };
 
 const mockDataExpenditureCategories = [
-  { id: 1, icon: faHome, name: '购物' },
-  { id: 2, icon: faHome, name: '餐饮' },
+  { id: 1, icon: faShoppingCart, name: '购物' },
+  { id: 2, icon: faUtensils, name: '餐饮' },
   { id: 3, icon: faHome, name: '住房' },
-  { id: 4, icon: faHome, name: '交通' },
-  { id: 5, icon: faHome, name: '医疗' },
-  { id: 6, icon: faHome, name: '亲子' },
-  { id: 7, icon: faHome, name: '学习' },
-  { id: 8, icon: faHome, name: '娱乐' },
-  { id: 9, icon: faHome, name: '宠物' },
-  { id: 10, icon: faHome, name: '其他' }
+  { id: 4, icon: faBus, name: '交通' },
+  { id: 5, icon: faCapsules, name: '医疗' },
+  { id: 6, icon: faBaby, name: '亲子' },
+  { id: 7, icon: faBook, name: '学习' },
+  { id: 8, icon: faDice, name: '娱乐' },
+  { id: 9, icon: faPaw, name: '宠物' },
+  { id: 10, icon: faClipboardList, name: '其他' }
 ];
 
 const mockDataIncomeCategories = [
-  { id: 1, icon: faHome, name: '工资' },
-  { id: 2, icon: faHome, name: '奖金' },
-  { id: 3, icon: faHome, name: '生意' },
-  { id: 4, icon: faHome, name: '红包' },
-  { id: 5, icon: faHome, name: '退款' },
-  { id: 6, icon: faHome, name: '其他' }
+  { id: 1, icon: faMoneyCheckAlt, name: '工资' },
+  { id: 2, icon: faGem, name: '奖金' },
+  { id: 3, icon: faHandshake, name: '生意' },
+  { id: 4, icon: faCommentDollar, name: '其他' }
 ];
 
 const AddPage = () => {
