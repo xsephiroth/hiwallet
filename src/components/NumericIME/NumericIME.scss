@@ -8,13 +8,14 @@
   width: 100%;
   z-index: 1001;
   background-color: $bg-primary;
-  transition: bottom 0.8s ease;
 
   position: fixed;
   left: 0;
-  bottom: -150%;
+  bottom: -120%;
   &.show {
     bottom: 0;
+    transition: bottom 0.8s cubic-bezier(0, 0.97, 0.25, 1);
+    transition-delay: 0.3s;
   }
 
   button {
