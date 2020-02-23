@@ -2,7 +2,7 @@ import React from 'react';
 import Heading from '../components/Heading';
 import InfoCard from '../components/InfoCard';
 import bgImg from '../assets/bg.jpg';
-import List from '../components/List';
+import ListCard from '../components/ListCard';
 import Layout from '../components/Layout';
 
 import {
@@ -16,25 +16,27 @@ import {
   faCar
 } from '@fortawesome/free-solid-svg-icons';
 
+import styles from './HomePage.module.scss';
+
 const mockData = [
   {
     id: '1',
     title: '房贷',
-    subtext: '02-13 20:30 ',
+    subtext: '',
     icon: faHome,
     expenditure: 10000
   },
   {
     id: '2',
     title: '利息',
-    subtext: '02-13 22:30',
+    subtext: '',
     icon: faYenSign,
     income: 2000
   },
   {
     id: '2.1',
     title: '买菜',
-    subtext: '02-14 11:30 芹菜 西兰花 生菜 虾 蟹5斤 生蚝200只',
+    subtext: '芹菜 西兰花 生菜 虾 蟹5斤 生蚝200只 杂菜100斤',
     icon: faUtensils,
     expenditure: 829.7
   },
@@ -42,56 +44,56 @@ const mockData = [
   {
     id: '3',
     title: '服饰美容',
-    subtext: '02-13 20:30 Michale Kors',
+    subtext: 'Michale Kors',
     icon: faTshirt,
     expenditure: 3580
   },
   {
     id: '4',
     title: '餐饮',
-    subtext: '02-11 22:30 下午茶',
+    subtext: '下午茶',
     icon: faUtensils,
     expenditure: 210
   },
   {
     id: '5',
     title: '娱乐',
-    subtext: '02-10 20:30 麻将',
+    subtext: '麻将',
     icon: faDice,
     expenditure: 800
   },
   {
     id: '6',
     title: '生活用品',
-    subtext: '02-10 20:30 宝宝',
+    subtext: '宝宝',
     icon: faShoppingCart,
     expenditure: 792.85
   },
   {
     id: '7',
     title: '电子数码',
-    subtext: '02-06 20:30 IPhone 11',
+    subtext: 'IPhone 11',
     icon: faLaptop,
     expenditure: 6000
   },
   {
     id: '8',
     title: '车辆',
-    subtext: '02-01 12:30 保险, 送油卡',
+    subtext: '保险, 送油卡',
     icon: faCar,
     expenditure: 5000
   },
   {
     id: '9',
     title: '生活用品',
-    subtext: '02-13 20:30 膳魔师',
+    subtext: '膳魔师',
     icon: faShoppingCart,
     expenditure: 140.74
   },
   {
     id: '10',
     title: '娱乐',
-    subtext: '02-10 20:30 麻将',
+    subtext: '麻将',
     icon: faDice,
     income: 20
   }
@@ -108,7 +110,10 @@ const HomePage = () => {
         <h1 className="primary">12345.67</h1>
         <p>收入12345.67</p>
       </InfoCard>
-      <List hideTabs={hideNavigationTabs} data={mockData} />
+      <div className={styles.listContainer}>
+        <ListCard start="02-13" end="支 20.00" data={mockData} />
+        <ListCard start="02-12" end="收 2000 支 180" data={mockData} />
+      </div>
     </Layout>
   );
 };

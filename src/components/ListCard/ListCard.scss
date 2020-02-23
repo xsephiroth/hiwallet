@@ -1,12 +1,22 @@
 @import '../../theme.scss';
 
-.list {
+.list-card {
   background-color: $bg-secondary;
-  height: calc(100vh - 3em - 9.5em - 2.7em);
-  overflow-y: scroll;
 
-  &.full {
-    height: calc(100vh - 3em - 9.5em);
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 0.8em;
+    padding-bottom: 0;
+
+    &__start,
+    &__end {
+      list-style: none;
+      color: $text-secondary;
+      font-size: 0.8em;
+    }
   }
 
   .item {
@@ -27,13 +37,13 @@
       border: none;
     }
 
-    .icon {
+    &__icon {
       display: flex;
       justify-content: center;
       margin-left: 1.2em;
     }
 
-    .content {
+    &__content {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -53,11 +63,11 @@
         z-index: 1;
       }
 
-      .title {
+      &__title {
         color: $text-primary;
       }
 
-      .subtext {
+      &__subtext {
         font-size: 0.8em;
         white-space: nowrap;
         color: $text-secondary;
@@ -81,4 +91,8 @@
       color: $text-primary;
     }
   }
+}
+
+.list-card + .list-card {
+  margin-top: 18px;
 }
