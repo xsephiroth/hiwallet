@@ -1,0 +1,5 @@
+.category-button-group {
+  margin: 0 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(2.8em, 1fr));
+}

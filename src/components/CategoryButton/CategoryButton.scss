@@ -1,0 +1,43 @@
+@import '../../theme.scss';
+
+.category-button {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  background: transparent;
+  border: none;
+  margin-bottom: 0.8em;
+  width: 4em;
+  outline: none;
+  opacity: 1;
+
+  &:active {
+    opacity: 0.6;
+  }
+
+  &::-moz-focus-inner {
+    border: none;
+  }
+
+  label {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid $primary;
+    width: 1.6rem;
+    height: 1.6rem;
+    background-color: $secondary;
+    color: $primary;
+
+    &.choice {
+      color: #fff;
+      background-color: $primary;
+    }
+  }
+
+  span {
+    font-size: 0.85em;
+    margin-top: 0.3em;
+  }
+}
