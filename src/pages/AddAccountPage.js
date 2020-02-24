@@ -1,24 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Heading from '../components/Heading';
 import Button from '../components/Button';
 import FormGroup from '../components/FormGroup';
+import useInput from '../hooks/useInput';
 import './AddAccountPage.scss';
 
-const useInputValue = initialValue => {
-  const [value, setValue] = useState(initialValue);
-  const onChange = e => setValue(e.target.value.trim());
-  return {
-    value,
-    onChange
-  };
-};
-
 const AddAccountPage = () => {
-  const name = useInputValue('');
-  const type = useInputValue('cash');
-  const remark = useInputValue('');
+  const name = useInput('');
+  const type = useInput('cash');
+  const remark = useInput('');
 
   const history = useHistory();
   const handleAdd = () => {};
