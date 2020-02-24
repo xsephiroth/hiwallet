@@ -60,8 +60,7 @@ const AddPage = () => {
   const billingType = useInput('expenditure');
   const [moneyValue, setMoneyValue] = useState('');
   const today = useMemo(() => getToday(), []);
-  const [date, setDate] = useState(today);
-  console.log(date);
+  const date = useInput(today);
   const expenditureCategoryId = useInput(mockDataExpenditureCategories[0].id);
   const incomeCategoryId = useInput(mockDataIncomeCategories[0].id);
   const note = useInput('');
@@ -89,7 +88,7 @@ const AddPage = () => {
               { value: 'transfer', text: '转账' }
             ]}
           />
-          <DateInput value={today} onChange={d => setDate(d)} />
+          <DateInput {...date} />
         </div>
         <MoneyInput value={moneyValue} />
       </div>

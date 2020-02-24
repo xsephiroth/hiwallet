@@ -1,23 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './DateInput.scss';
 
 const DateInput = ({ value, onChange }) => {
-  const today = value;
-  const [date, setDate] = useState(today);
-
-  const handleDateChange = e => {
-    const date = e.target.value || today;
-    setDate(date);
-    onChange && onChange(date);
-  };
-
   return (
-    <input
-      className="datepicker"
-      type="date"
-      value={date}
-      onChange={handleDateChange}
-    />
+    <div className="datepicker">
+      <input className="picker" type="date" value={value} onChange={onChange} />
+      <span>{value}</span>
+    </div>
   );
 };
 

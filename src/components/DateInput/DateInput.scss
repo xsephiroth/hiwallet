@@ -1,16 +1,58 @@
 @import '../../theme.scss';
 
-.datepicker[type='date'] {
+.datepicker {
+  position: relative;
   border: 1px solid $primary;
   border-radius: 20px;
-  padding: 0.5em 0.2em 0.5em 0.5em;
+  line-height: 1em;
+  padding: 0.3em;
+  padding-right: 0;
+  color: $text-primary;
 
-  &::-webkit-datetime-edit {
-    max-width: 75%;
+  span {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    margin-left: 6px;
+    pointer-events: none;
   }
 
-  &::-webkit-clear-button,
-  &::-webkit-inner-spin-button {
-    display: none;
+  .picker[type='date'] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    position: relative;
+    user-select: none;
+
+    &::-webkit-calendar-picker-indicator {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+
+    &::-webkit-datetime-edit {
+      margin-left: 5%;
+      max-width: 85%;
+      &::-webkit-datetime-edit-fields-wrapper:focus {
+        outline: none;
+        background-color: transparent;
+      }
+    }
+
+    &::-webkit-clear-button,
+    &::-webkit-inner-spin-button {
+      display: none;
+    }
   }
 }
