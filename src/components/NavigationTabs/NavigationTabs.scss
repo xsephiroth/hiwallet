@@ -16,8 +16,9 @@
 
   .tabs-wrapper {
     width: 100%;
-    display: flex;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 1em;
     align-content: flex-end;
 
     &::after {
@@ -37,7 +38,6 @@
   }
 
   .tab {
-    min-width: 6em;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
