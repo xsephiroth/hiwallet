@@ -9,6 +9,7 @@ import {
   faCreditCard
 } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import styles from './AccountPage.module.scss';
 
 const mockDataAccounts = [
   {
@@ -40,6 +41,12 @@ const mockDataAccounts = [
     type: 'creditCard',
     name: '招商银行外币',
     balance: -100
+  },
+  {
+    id: 6,
+    type: 'investment',
+    name: '黄金',
+    balance: 12345
   }
 ];
 
@@ -62,30 +69,45 @@ const AccountPage = () => {
           />
         }
       />
-      <ListCard start="现金">
-        {mockDataAccounts
-          ?.filter(acc => acc.type === 'cash')
-          .map(acc => (
-            <ListCardItem
-              key={acc.id}
-              icon={faYenSign}
-              title={acc.name}
-              expenditure={acc.balance}
-            />
-          ))}
-      </ListCard>
-      <ListCard start="信用卡">
-        {mockDataAccounts
-          ?.filter(acc => acc.type === 'creditCard')
-          .map(acc => (
-            <ListCardItem
-              key={acc.id}
-              icon={faCreditCard}
-              title={acc.name}
-              expenditure={acc.balance}
-            />
-          ))}
-      </ListCard>
+      <div className={styles.listContainer}>
+        <ListCard start="现金">
+          {mockDataAccounts
+            ?.filter(acc => acc.type === 'cash')
+            .map(acc => (
+              <ListCardItem
+                key={acc.id}
+                icon={faYenSign}
+                title={acc.name}
+                expenditure={acc.balance}
+              />
+            ))}
+        </ListCard>
+        <ListCard start="信用卡">
+          {mockDataAccounts
+            ?.filter(acc => acc.type === 'creditCard')
+            .map(acc => (
+              <ListCardItem
+                key={acc.id}
+                icon={faCreditCard}
+                title={acc.name}
+                expenditure={acc.balance}
+              />
+            ))}
+        </ListCard>
+
+        <ListCard start="投资">
+          {mockDataAccounts
+            ?.filter(acc => acc.type === 'investment')
+            .map(acc => (
+              <ListCardItem
+                key={acc.id}
+                icon={faCreditCard}
+                title={acc.name}
+                expenditure={acc.balance}
+              />
+            ))}
+        </ListCard>
+      </div>
     </Layout>
   );
 };
