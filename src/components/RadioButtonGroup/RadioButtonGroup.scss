@@ -12,7 +12,7 @@
     background-color: #fef0f0;
     color: #f56c6c;
     font-size: 0.9em;
-    padding: 0.5em 1.3em;
+    padding: 0.3em 1em;
     border-right: 1px solid #fbc4c4;
     transition: all 0.1s ease;
 
@@ -23,6 +23,7 @@
     input[type='radio'] {
       -webkit-appearance: none;
       visibility: hidden;
+      width: 0;
     }
 
     &.checked {
