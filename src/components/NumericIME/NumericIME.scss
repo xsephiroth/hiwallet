@@ -26,10 +26,6 @@
     color: $text-primary;
     opacity: 1;
 
-    &::-moz-focus-inner {
-      border: 0;
-    }
-
     &:active {
       opacity: 0.75;
     }
