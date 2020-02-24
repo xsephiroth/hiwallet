@@ -32,8 +32,8 @@ const NavigationTabs = () => {
         </div>
 
         <div
-          className={classnames('tab', { active: pathname === '/account' })}
-          onClick={useCallback(() => history.replace('/account'), [history])}
+          className={classnames('tab', { active: pathname === '/accounts' })}
+          onClick={useCallback(() => history.replace('/accounts'), [history])}
         >
           <FontAwesomeIcon icon={faWallet} size="2x" />
           账户

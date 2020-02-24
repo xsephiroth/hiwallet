@@ -1,10 +1,12 @@
 import React, { useEffect, lazy, Suspense } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
+import { StateProvider } from './store';
+
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AddPage = lazy(() => import('./pages/AddPage'));
+const AccountsPage = lazy(() => import('./pages/AccountsPage'));
 const AccountPage = lazy(() => import('./pages/AccountPage'));
-const AddAccountPage = lazy(() => import('./pages/AddAccountPage'));
 
 // setup check service worker manually update interval
 const useUpdatePwaServiceWorker = (interval = 60 * 1000) => {
@@ -29,10 +31,12 @@ function App() {
     <Suspense fallback={<div className="fallback-loading">Loading...</div>}>
       <Router>
         <Switch>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/add" component={AddPage} />
-          <Route path="/account" exact component={AccountPage} />
-          <Route path="/account/add" component={AddAccountPage} />
+          <StateProvider>
+            <Route path="/" exact component={HomePage} />
+            <Route path="/add" component={AddPage} />
+            <Route path="/accounts" exact component={AccountsPage} />
+            <Route path="/accounts/:id" component={AccountPage} />
+          </StateProvider>
         </Switch>
       </Router>
     </Suspense>

@@ -1,115 +1,90 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { store } from '../store';
 import Layout from '../components/Layout';
 import Heading from '../components/Heading';
-import { ListCard, ListCardItem } from '../components/ListCard';
-import {
-  faPlus,
-  faYenSign,
-  faCreditCard
-} from '@fortawesome/free-solid-svg-icons';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import styles from './AccountPage.module.scss';
+import Button from '../components/Button';
+import FormGroup from '../components/FormGroup';
+import useInput from '../hooks/useInput';
+import './AccountPage.scss';
 
-const mockDataAccounts = [
-  {
-    id: 1,
-    type: 'cash',
-    name: '现金',
-    balance: 200
-  },
-  {
-    id: 2,
-    type: 'cash',
-    name: '储蓄0086',
-    balance: 200
-  },
-  {
-    id: 3,
-    type: 'cash',
-    name: '储蓄2788',
-    balance: 2000
-  },
-  {
-    id: 4,
-    type: 'creditCard',
-    name: '招商银行1123',
-    balance: -5000
-  },
-  {
-    id: 5,
-    type: 'creditCard',
-    name: '招商银行外币',
-    balance: -100
-  },
-  {
-    id: 6,
-    type: 'investment',
-    name: '黄金',
-    balance: 12345
-  }
-];
+const AddAccountPage = ({ match }) => {
+  const {
+    state: { accounts },
+    dispatch
+  } = useContext(store);
 
-const AccountPage = () => {
+  const id = match.params.id;
+  const isCreateNew = id === 'create';
+  const account = isCreateNew ? {} : accounts.find(acc => acc.id === +id) ?? {};
+
+  const name = useInput(account?.name ?? '');
+  const type = useInput(account?.type ?? 'cash');
+  const remark = useInput(account?.remark ?? '');
+  const balance = useInput(account?.balance ?? 0);
+
   const history = useHistory();
-  return (
-    <Layout>
-      <Heading
-        title="账户"
-        start={
-          <Heading.Icon
-            icon={faArrowLeft}
-            onClick={() => history.replace('/')}
-          />
-        }
-        end={
-          <Heading.Icon
-            icon={faPlus}
-            onClick={() => history.replace('/account/add')}
-          />
-        }
-      />
-      <div className={styles.listContainer}>
-        <ListCard start="现金">
-          {mockDataAccounts
-            ?.filter(acc => acc.type === 'cash')
-            .map(acc => (
-              <ListCardItem
-                key={acc.id}
-                icon={faYenSign}
-                title={acc.name}
-                expenditure={acc.balance}
-              />
-            ))}
-        </ListCard>
-        <ListCard start="信用卡">
-          {mockDataAccounts
-            ?.filter(acc => acc.type === 'creditCard')
-            .map(acc => (
-              <ListCardItem
-                key={acc.id}
-                icon={faCreditCard}
-                title={acc.name}
-                expenditure={acc.balance}
-              />
-            ))}
-        </ListCard>
+  const backToAccountsPage = () => history.replace('/accounts');
 
-        <ListCard start="投资">
-          {mockDataAccounts
-            ?.filter(acc => acc.type === 'investment')
-            .map(acc => (
-              <ListCardItem
-                key={acc.id}
-                icon={faCreditCard}
-                title={acc.name}
-                expenditure={acc.balance}
-              />
-            ))}
-        </ListCard>
+  const handleAddAccount = async () => {
+    // TODO
+    const mock = {
+      id: Math.random() * 100,
+      name: name.value,
+      type: type.value,
+      remark: remark.value,
+      balance: +balance.value || 0
+    };
+    dispatch({ type: 'ADD_ACCOUNT', payload: mock });
+    backToAccountsPage();
+    return;
+
+    try {
+      const res = await axios.post('/accounts', {
+        name: name.value,
+        type: type.value,
+        remark: remark.value
+      });
+      dispatch({ type: 'ADD_ACCOUNT', payload: res.data });
+    } catch (e) {
+      console.error(e?.message);
+    }
+  };
+
+  return (
+    <Layout hideTabs>
+      <Heading title="添加账户" />
+      <div className="container addAccountPage">
+        <form>
+          <FormGroup>
+            <input type="text" placeholder="名称" {...name} />
+          </FormGroup>
+          <FormGroup>
+            <select {...type}>
+              <option value="cash">现金</option>
+              <option value="creditCard">信用卡</option>
+              <option value="investment">投资</option>
+            </select>
+          </FormGroup>
+          <FormGroup label="初始余额">
+            <input type="number" {...balance} />
+          </FormGroup>
+          <FormGroup>
+            <textarea placeholder="备注" {...remark}></textarea>
+          </FormGroup>
+        </form>
+        <div className="btnGroup">
+          <Button primary block onClick={handleAddAccount}>
+            添加
+          </Button>
+          <Button block onClick={backToAccountsPage}>
+            取消
+          </Button>
+        </div>
       </div>
     </Layout>
   );
 };
 
-export default AccountPage;
+export default AddAccountPage;
