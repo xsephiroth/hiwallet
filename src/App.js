@@ -4,6 +4,7 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AddPage = lazy(() => import('./pages/AddPage'));
 const AccountPage = lazy(() => import('./pages/AccountPage'));
+const AddAccountPage = lazy(() => import('./pages/AddAccountPage'));
 
 // setup check service worker manually update interval
 const useUpdatePwaServiceWorker = (interval = 60 * 1000) => {
@@ -30,7 +31,8 @@ function App() {
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/add" component={AddPage} />
-          <Route path="/account" component={AccountPage} />
+          <Route path="/account" exact component={AccountPage} />
+          <Route path="/account/add" component={AddAccountPage} />
         </Switch>
       </Router>
     </Suspense>
