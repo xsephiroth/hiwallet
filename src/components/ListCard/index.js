@@ -3,11 +3,18 @@ import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './ListCard.scss';
 
-const ListCardItem = ({ icon, title, subtext, income, expenditure }) => {
+const ListCardItem = ({
+  icon,
+  title,
+  subtext,
+  income,
+  expenditure,
+  ...restProps
+}) => {
   const toFixed = v => (v % 1 === 0 ? v : v.toFixed(2));
 
   return (
-    <div className="item">
+    <div className="item" {...restProps}>
       <div className="item__icon">
         <FontAwesomeIcon icon={icon} />
       </div>
