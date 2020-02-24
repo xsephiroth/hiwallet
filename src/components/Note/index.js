@@ -18,19 +18,13 @@ const Note = ({ onActiveChange, ...props }) => {
     };
 
     if (current) {
-      current.addEventListener('mouseenter', enter);
       current.addEventListener('focus', enter);
-
-      current.addEventListener('mouseleave', leave);
       current.addEventListener('blur', leave);
     }
 
     return () => {
       if (current) {
-        current.removeEventListener('mouseenter', enter);
         current.removeEventListener('focus', enter);
-
-        current.removeEventListener('mouseleave', leave);
         current.removeEventListener('blur', leave);
       }
     };
@@ -38,7 +32,6 @@ const Note = ({ onActiveChange, ...props }) => {
 
   return (
     <textarea
-      // className="note"
       className={classnames('note', { editing })}
       placeholder="备注"
       {...props}
