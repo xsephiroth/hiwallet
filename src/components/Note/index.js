@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import classnames from 'classnames';
 import './Note.scss';
 
-const Note = ({ onActiveChange, ...props }) => {
+const Note = ({ onActiveChange, className, ...props }) => {
   const [editing, setEditing] = useState(false);
   const ref = useRef();
   useEffect(() => {
@@ -32,7 +32,7 @@ const Note = ({ onActiveChange, ...props }) => {
 
   return (
     <textarea
-      className={classnames('note', { editing })}
+      className={classnames('note', { editing }, className)}
       placeholder="备注"
       {...props}
       ref={ref}
