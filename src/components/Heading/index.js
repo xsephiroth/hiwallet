@@ -1,24 +1,25 @@
 import React from 'react';
-import './Heading.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import './Heading.scss';
 
-const Heading = ({ start, onBackClick, end, title }) => {
+const Icon = ({ icon, onClick }) => {
+  return (
+    <div className="icon" onClick={onClick}>
+      <FontAwesomeIcon icon={icon} />
+    </div>
+  );
+};
+
+const Heading = ({ start, end, title }) => {
   return (
     <div className="heading">
-      <div className="start" onClick={onBackClick}>
-        {onBackClick ? (
-          <div className="back">
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </div>
-        ) : (
-          start
-        )}
-      </div>
+      <div className="start">{start}</div>
       <div className="title">{title}</div>
       <div className="end">{end}</div>
     </div>
   );
 };
+
+Heading.Icon = Icon;
 
 export default Heading;

@@ -1,13 +1,32 @@
 @import '../../theme.scss';
 
-.heading {
-  @mixin headingMixin {
-    > * {
-      width: 100%;
-      overflow: hidden;
+@mixin headingChildren {
+  > * {
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+@mixin headingIcon {
+  .icon {
+    max-width: 3em;
+    height: 2em;
+
+    color: $text-primary;
+    font-size: 1.2em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 1;
+    &:hover {
+      opacity: 0.9;
     }
   }
+}
 
+.heading {
   height: 3em;
   color: $text-primary;
   background-color: $bg-secondary;
@@ -16,27 +35,6 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 
-  .start {
-    grid-column: 1/2;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-left: 0.65em;
-
-    @include headingMixin;
-
-    .back {
-      color: $text-primary;
-      margin-left: 0.8em;
-      opacity: 1;
-      font-size: 1.2em;
-
-      &:hover {
-        opacity: 0.9;
-      }
-    }
-  }
-
   .title {
     grid-column: 2/3;
     display: flex;
@@ -44,7 +42,18 @@
     align-items: center;
     font-weight: 600;
 
-    @include headingMixin;
+    @include headingChildren;
+  }
+
+  .start {
+    grid-column: 1/2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 0.65em;
+
+    @include headingChildren;
+    @include headingIcon;
   }
 
   .end {
@@ -54,6 +63,7 @@
     align-items: center;
     margin-right: 0.65em;
 
-    @include headingMixin;
+    @include headingChildren;
+    @include headingIcon;
   }
 }

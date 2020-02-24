@@ -3,13 +3,12 @@ import { useHistory } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Heading from '../components/Heading';
 import { ListCard, ListCardItem } from '../components/ListCard';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlus,
   faYenSign,
   faCreditCard
 } from '@fortawesome/free-solid-svg-icons';
-import styles from './AccountPage.module.scss';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const mockDataAccounts = [
   {
@@ -44,26 +43,24 @@ const mockDataAccounts = [
   }
 ];
 
-const AddAccount = () => {
-  const handleAddAccount = () => {
-    alert('add');
-  };
-
-  return (
-    <div className={styles.addAccountWrapper} onClick={handleAddAccount}>
-      <FontAwesomeIcon icon={faPlus} />
-    </div>
-  );
-};
-
 const AccountPage = () => {
   const history = useHistory();
   return (
     <Layout>
       <Heading
-        onBackClick={() => history.replace('/')}
         title="账户"
-        end={<AddAccount />}
+        start={
+          <Heading.Icon
+            icon={faArrowLeft}
+            onClick={() => history.replace('/')}
+          />
+        }
+        end={
+          <Heading.Icon
+            icon={faPlus}
+            onClick={() => history.replace('/account/add')}
+          />
+        }
       />
       <ListCard start="现金">
         {mockDataAccounts

@@ -20,7 +20,8 @@ import {
   faHandshake,
   faMoneyCheckAlt,
   faGem,
-  faCommentDollar
+  faCommentDollar,
+  faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
 import Note from '../components/Note';
 import NumericIME from '../components/NumericIME';
@@ -80,7 +81,15 @@ const AddPage = () => {
 
   return (
     <Layout hideTabs>
-      <Heading onBackClick={() => history.replace('/')} title="记账" />
+      <Heading
+        title="记账"
+        start={
+          <Heading.Icon
+            icon={faArrowLeft}
+            onClick={() => history.replace('/')}
+          />
+        }
+      />
       <div className="container">
         <div className={styles.infoBar}>
           <RadioButtonGroup>
