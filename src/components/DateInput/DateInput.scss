@@ -9,13 +9,14 @@
   color: $text-primary;
 
   span {
-    display: inline-block;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
-    margin-left: 6px;
+
+    width: 100%;
+    text-align: center;
+
     pointer-events: none;
   }
 
