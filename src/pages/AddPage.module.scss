@@ -1,5 +1,25 @@
+.container {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
 .infoBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.accountBtnWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 0.5em;
+}
+
+.accountBtn {
+  padding: 0.2em 0.8em;
+}
+
+.note {
+  padding: 0.5em;
 }

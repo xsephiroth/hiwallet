@@ -1,11 +1,13 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import classnames from 'classnames';
 import Layout from '../components/Layout';
 import Heading from '../components/Heading';
 import RadioButtonGroup from '../components/RadioButtonGroup';
 import MoneyInput from '../components/MoneyInput';
 import DateInput from '../components/DateInput';
 import CategoryButtonGroup from '../components/CategoryButtonGroup';
+import AccountList from '../components/AccountList';
 import {
   faShoppingCart,
   faUtensils,
@@ -25,7 +27,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Note from '../components/Note';
 import NumericIME from '../components/NumericIME';
+import Button from '../components/Button';
 import useInput from '../hooks/useInput';
+import { store } from '../store';
 
 import styles from './AddPage.module.scss';
 
@@ -65,6 +69,17 @@ const AddPage = () => {
   const incomeCategoryId = useInput(mockDataIncomeCategories[0].id);
   const note = useInput('');
   const [numericIMEShow, setNumericIMEShow] = useState(true);
+
+  const {
+    state: { accounts }
+  } = useContext(store);
+  const [showAccounts, setShowAccounts] = useState(false);
+  const [account, setAccount] = useState(accounts?.[0]);
+  const handleAccountClick = id => {
+    setShowAccounts(false);
+    setAccount(accounts.find(acc => acc.id === id));
+  };
+
   const history = useHistory();
 
   return (
@@ -78,7 +93,7 @@ const AddPage = () => {
           />
         }
       />
-      <div className="container">
+      <div className={classnames('container', styles.container)}>
         <div className={styles.infoBar}>
           <RadioButtonGroup
             {...billingType}
@@ -90,8 +105,28 @@ const AddPage = () => {
           />
           <DateInput {...date} />
         </div>
+
         <MoneyInput value={moneyValue} />
+
+        {showAccounts && accounts.length !== 0 && (
+          <AccountList
+            accounts={accounts}
+            fullScreen
+            onClick={handleAccountClick}
+          />
+        )}
+        <div className={styles.accountBtnWrapper}>
+          <Button
+            className={classnames(styles.accountBtn)}
+            primary
+            disabled={!account}
+            onClick={() => setShowAccounts(true)}
+          >
+            {account?.name ?? '无账户'}
+          </Button>
+        </div>
       </div>
+
       {billingType.value === 'expenditure' && (
         <CategoryButtonGroup
           categories={mockDataExpenditureCategories}
@@ -104,7 +139,11 @@ const AddPage = () => {
           {...incomeCategoryId}
         />
       )}
-      <Note {...note} onActiveChange={active => setNumericIMEShow(!active)} />
+      <Note
+        className={styles.note}
+        {...note}
+        onActiveChange={active => setNumericIMEShow(!active)}
+      />
       <NumericIME onChange={setMoneyValue} show={numericIMEShow} />
     </Layout>
   );
