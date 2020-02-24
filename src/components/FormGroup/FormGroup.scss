@@ -1,0 +1,39 @@
+@import '../../theme.scss';
+
+.form-group {
+  label {
+    display: block;
+    font-size: 0.8rem;
+  }
+
+  input,
+  select,
+  textarea {
+    margin: 0.5em 0;
+    padding: 0.7em;
+    width: 100%;
+
+    font-family: inherit;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: white;
+
+    &:focus {
+      outline: 2px solid $primary;
+    }
+  }
+
+  select {
+    option {
+      display: block;
+      padding: 0.7em;
+    }
+  }
+
+  textarea {
+    resize: none;
+    min-height: 6em;
+  }
+}
