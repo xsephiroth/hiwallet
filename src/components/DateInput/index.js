@@ -10,4 +10,4 @@ const DateInput = ({ value, onChange }) => {
   );
 };
 
-export default DateInput;
+export default React.memo(DateInput);
