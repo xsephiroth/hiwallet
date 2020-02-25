@@ -2,6 +2,7 @@ import React, { useEffect, lazy, Suspense } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { StateProvider } from './store';
+import { BillingTypeCategoriesProvider } from './context/BillingTypeCategoriesContext';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AddPage = lazy(() => import('./pages/AddPage'));
@@ -32,10 +33,12 @@ function App() {
       <Router>
         <Switch>
           <StateProvider>
-            <Route path="/" exact component={HomePage} />
-            <Route path="/add" component={AddPage} />
-            <Route path="/accounts" exact component={AccountsPage} />
-            <Route path="/accounts/:id" component={AccountPage} />
+            <BillingTypeCategoriesProvider>
+              <Route path="/" exact component={HomePage} />
+              <Route path="/add" component={AddPage} />
+              <Route path="/accounts" exact component={AccountsPage} />
+              <Route path="/accounts/:id" component={AccountPage} />
+            </BillingTypeCategoriesProvider>
           </StateProvider>
         </Switch>
       </Router>

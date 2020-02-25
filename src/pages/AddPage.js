@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useContext } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import classnames from 'classnames';
 import Layout from '../components/Layout';
@@ -8,28 +8,13 @@ import MoneyInput from '../components/MoneyInput';
 import DateInput from '../components/DateInput';
 import CategoryButtonGroup from '../components/CategoryButtonGroup';
 import AccountList from '../components/AccountList';
-import {
-  faShoppingCart,
-  faUtensils,
-  faHome,
-  faBus,
-  faCapsules,
-  faBaby,
-  faBook,
-  faDice,
-  faPaw,
-  faClipboardList,
-  faHandshake,
-  faMoneyCheckAlt,
-  faGem,
-  faCommentDollar,
-  faArrowLeft
-} from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Note from '../components/Note';
 import NumericIME from '../components/NumericIME';
 import Button from '../components/Button';
 import useInput from '../hooks/useInput';
 import { store } from '../store';
+import { BillingTypeCategoriesContext } from '../context/BillingTypeCategoriesContext';
 
 import styles from './AddPage.module.scss';
 
@@ -40,33 +25,52 @@ const getToday = () => {
   return `${date.getFullYear()}-${month}-${day}`;
 };
 
-const mockDataExpenditureCategories = [
-  { id: 1, icon: faShoppingCart, name: '购物' },
-  { id: 2, icon: faUtensils, name: '餐饮' },
-  { id: 3, icon: faHome, name: '住房' },
-  { id: 4, icon: faBus, name: '交通' },
-  { id: 5, icon: faCapsules, name: '医疗' },
-  { id: 6, icon: faBaby, name: '亲子' },
-  { id: 7, icon: faBook, name: '学习' },
-  { id: 8, icon: faDice, name: '娱乐' },
-  { id: 9, icon: faPaw, name: '宠物' },
-  { id: 10, icon: faClipboardList, name: '其他' }
-];
+const useBillingType = initialCategoryId => {
+  const billingType = useInput('expenditure');
 
-const mockDataIncomeCategories = [
-  { id: 1, icon: faMoneyCheckAlt, name: '工资' },
-  { id: 2, icon: faGem, name: '奖金' },
-  { id: 3, icon: faHandshake, name: '生意' },
-  { id: 4, icon: faCommentDollar, name: '其他' }
-];
+  const billingTypeCategories = useContext(BillingTypeCategoriesContext);
+
+  // filter categories by billingType
+  const categories = useMemo(
+    () => billingTypeCategories.filter(c => c.type === billingType.value),
+    [billingTypeCategories, billingType]
+  );
+
+  const categoryFirstId = categories?.[0]?.id;
+
+  const [categoryId, setCategoryId] = useState(initialCategoryId);
+
+  // when billingType changed, reselect categoryId
+  useEffect(() => {
+    if (categories.find(c => c.id === categoryId)) {
+      // when user select a categoryId
+      setCategoryId(categoryId);
+    } else if (categories.find(c => c.id === initialCategoryId)) {
+      // when user switch billingType and
+      // initialCategoryId is in current categories
+      // use the initialCategoryId
+      setCategoryId(initialCategoryId);
+    } else {
+      // last default choice
+      setCategoryId(categoryFirstId);
+    }
+  }, [billingType, categories]);
+
+  return {
+    billingType,
+    categories,
+    categoryId: {
+      value: categoryId,
+      onChange: e => setCategoryId(e.target.value)
+    }
+  };
+};
 
 const AddPage = () => {
-  const billingType = useInput('expenditure');
+  const { billingType, categories, categoryId } = useBillingType();
   const [moneyValue, setMoneyValue] = useState('');
   const today = useMemo(() => getToday(), []);
   const date = useInput(today);
-  const expenditureCategoryId = useInput(mockDataExpenditureCategories[0].id);
-  const incomeCategoryId = useInput(mockDataIncomeCategories[0].id);
   const note = useInput('');
   const [numericIMEShow, setNumericIMEShow] = useState(true);
 
@@ -127,23 +131,14 @@ const AddPage = () => {
         </div>
       </div>
 
-      {billingType.value === 'expenditure' && (
-        <CategoryButtonGroup
-          categories={mockDataExpenditureCategories}
-          {...expenditureCategoryId}
-        />
-      )}
-      {billingType.value === 'income' && (
-        <CategoryButtonGroup
-          categories={mockDataIncomeCategories}
-          {...incomeCategoryId}
-        />
-      )}
+      <CategoryButtonGroup categories={categories} {...categoryId} />
+
       <Note
         className={styles.note}
         {...note}
         onActiveChange={active => setNumericIMEShow(!active)}
       />
+
       <NumericIME
         initialValue={moneyValue}
         onChange={setMoneyValue}
