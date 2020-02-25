@@ -20,4 +20,4 @@ const RadioButtonGroup = ({ data, value, onChange }) => {
   );
 };
 
-export default RadioButtonGroup;
+export default React.memo(RadioButtonGroup);
