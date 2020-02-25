@@ -19,4 +19,4 @@ const CategoryButtonGroup = ({ categories, value, onChange }) => {
   );
 };
 
-export default CategoryButtonGroup;
+export default React.memo(CategoryButtonGroup);
