@@ -10,4 +10,4 @@ const MoneyInput = ({ value, onClick }) => {
   );
 };
 
-export default MoneyInput;
+export default React.memo(MoneyInput);

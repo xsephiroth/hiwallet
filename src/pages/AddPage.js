@@ -144,7 +144,11 @@ const AddPage = () => {
         {...note}
         onActiveChange={active => setNumericIMEShow(!active)}
       />
-      <NumericIME onChange={setMoneyValue} show={numericIMEShow} />
+      <NumericIME
+        initialValue={moneyValue}
+        onChange={setMoneyValue}
+        show={numericIMEShow}
+      />
     </Layout>
   );
 };

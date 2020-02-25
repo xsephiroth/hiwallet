@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBackspace } from '@fortawesome/free-solid-svg-icons';
 import './NumericIME.scss';
 
-const NumericIME = ({ onChange, show, onExit }) => {
-  const [value, setValue] = useState('');
+const NumericIME = ({ initialValue = '', onChange, show, onExit }) => {
+  const [value, setValue] = useState(initialValue);
 
   const handleNumClick = v => {
     if (v === '0' && (value === '') | '0.') return;
@@ -76,4 +76,4 @@ const NumericIME = ({ onChange, show, onExit }) => {
   );
 };
 
-export default NumericIME;
+export default React.memo(NumericIME);
