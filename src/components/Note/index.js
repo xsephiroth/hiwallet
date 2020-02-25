@@ -40,4 +40,4 @@ const Note = ({ onActiveChange, className, ...props }) => {
   );
 };
 
-export default Note;
+export default React.memo(Note);
